@@ -4,7 +4,7 @@
 PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int tableSize, long targetNumber){
     const PtrToConstEmployee endPtr = ptr + tableSize;
 
-    for(; ptr < endPtr; ptr++){     //serach until end of table
+    for(; ptr < endPtr; ptr++){     //search until end of table
         if(ptr->number == targetNumber) //check if it equals the employee number
             return (PtrToEmployee) ptr;   //type cast prt to PtrToEmployee to make sure it isnt a constant and then return location of it number to callee
     }
@@ -16,8 +16,30 @@ PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int tableSize, long
 PtrToEmployee searchEmployeeByName(PtrToConstEmployee ptr, int tableSize, char * targetName){
     const PtrToConstEmployee endPtr = ptr + tableSize;
 
-    for(; ptr < endPtr; ptr++){     //serach until end of table
+    for(; ptr < endPtr; ptr++){     //search until end of table
         if(strcmp(ptr->name, targetName) == 0) //check if it equals the employee number
+            return (PtrToEmployee) ptr;   //return location of the number to callee
+    }
+
+    return NULL; //this will only happen if no employee name matches in the loop above
+}
+
+PtrToEmployee searchEmployeeByPhone(PtrToConstEmployee ptr, int tableSize, char * targetPhone){
+    const PtrToConstEmployee endPtr = ptr + tableSize;
+
+    for(; ptr < endPtr; ptr++){     //search until end of table
+        if(strcmp(ptr->phone, targetPhone) == 0) //check if it equals the employee number
+            return (PtrToEmployee) ptr;   //return location of the number to callee
+    }
+
+    return NULL; //this will only happen if no employee name matches in the loop above
+}
+
+PtrToEmployee searchEmployeeBySalary(PtrToConstEmployee ptr, int tableSize, double targetSalary){
+    const PtrToConstEmployee endPtr = ptr + tableSize;
+
+    for(; ptr < endPtr; ptr++){     //search until end of table
+        if(ptr->salary == targetSalary) //check if it equals the employee number
             return (PtrToEmployee) ptr;   //return location of the number to callee
     }
 
