@@ -11,6 +11,7 @@
 //What does setting a function to static do??  This search function can ONLY be used in this file.
 //functionPtr is the address of the function just use the name 
 //()(The second set of parentheses is the arguments of the function call)
+
 static PtrToEmployee searchEmployeeTable(PtrToConstEmployee ptr, int tableSize, const void *targetPtr, 
                                             int (*functionPtr)(const void *, PtrToConstEmployee))
 {
@@ -33,6 +34,14 @@ static int compareEmployeeName(const void *targetPtr, PtrToConstEmployee tableva
     return strcmp((char *) targetPtr, tablevaluePtr->name); //const void *targetPtr ==> typecast as char pointer then pass into strcmp()
 }
 
+static int compareEmployeePhone(const void *targetPtr, PtrToConstEmployee tablevaluePtr){
+    return strcmp((char *) targetPtr, tablevaluePtr->phone);
+}
+
+static int compareEmployeeSalary(const void *targetPtr, PtrToConstEmployee tablevaluePtr){
+    return * (double *) targetPtr != tablevaluePtr->salary;
+}
+
 
 
 //These are called wrappers. These functions are what you will use in your main.c file!!!
@@ -42,4 +51,12 @@ PtrToEmployee searchEmployeeByNumber(PtrToConstEmployee ptr, int size, long numb
 
 PtrToEmployee searchEmployeeByName(PtrToConstEmployee ptr, int size, char* name){
     return searchEmployeeTable(ptr, size, name, compareEmployeeName);
+}
+
+PtrToEmployee searchEmployeeByPhone(PtrToConstEmployee ptr, int size, char* phone){
+    return searchEmployeeTable(ptr, size, phone, compareEmployeePhone);
+}
+
+PtrToEmployee searchEmployeeBySalary(PtrToConstEmployee ptr, int size, double salary){
+    return searchEmployeeTable(ptr, size, &salary, compareEmployeeSalary);
 }
